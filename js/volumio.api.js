@@ -198,6 +198,45 @@ function getPlaylist(json){
     });
 }
 
+function getRfidlist(json){
+    $.getJSON('db/?cmd=rfidlist', function(data) {
+        // Read received data for playlist
+        var i = 0;
+        var content = '';
+        var output = '';
+        if (data) {
+            for (i = 0; i < data.length; i++){
+                if (json['state'] != 'stop' && i == parseInt(json['song'])) {
+                    content = '<li id="pl-' + (i + 1) + '" class="active clearfix">';
+                } else {
+                    content = '<li id="pl-' + (i + 1) + '" class="clearfix">';
+                }
+                content += '<div class="pl-action"><a class="btn" href="#notarget" title="Remove song from playlist"><i class="fa fa-remove"></i></a></div>';
+                if (typeof data[i].Title != 'undefined') {
+                    content += '<div class="pl-entry">';
+                    content += data[i].Title + ' <em class="songtime">' + timeConvert(data[i].Time) + '</em>';
+                    content += ' <span>';
+                    content +=  data[i].Artist;
+                    content += ' - ';
+                    content +=  data[i].Album;
+                    content += '</span></div></li>';
+                    output = output + content;
+                } else {
+                    songpath = parsePath(data[i].file);
+                    content += '<div class="pl-entry">';
+                    content += data[i].file.replace(songpath + '/', '') + ' <em class="songtime">' + timeConvert(data[i].Time) + '</em>';
+                    content += ' <span>';
+                    content += ' path \: ';
+                    content += songpath;
+                    content += '</span></div></li>';
+                    output = output + content;
+                }
+            }
+        }
+        $('ul.rfidlist').html(output);
+    });
+}
+
 function parsePath(str) {
 	var cutpos=str.lastIndexOf("/");
 	//-- verify this switch! (Orion)

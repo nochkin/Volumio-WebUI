@@ -22,17 +22,24 @@
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
  * 
- * file:							connection.php
+ * file:							rfid_lib.php
  * version:						1.0
  *
  */
+
+function getRfidlist($db) {
+	$querystr = 'SELECT tag,tagname,mytime,playfile FROM rfid_tags';
+	$result = array();
+	$dbh = new PDO($db);
+	$query = $dbh->prepare($querystr);
+	if ($query->execute()) {
+		$i = 0;
+		foreach ($query as $value) {
+		    $result[$i] = $value;
+		    $i++;
+		}
+	}
+	return $result;
+}
  
-require('config.inc');
-error_reporting(ERRORLEVEL);
-// include player library
-include(ROOTPATH.'inc/player_lib.php');
-include(ROOTPATH.'inc/rfid_lib.php');
-// configuro parametri di connessione con demone MPD
-$mpd = openMpdSocket(DAEMONIP, 6600) ;
-$spop = openSpopSocket(DAEMONIP, 6602);
 ?>

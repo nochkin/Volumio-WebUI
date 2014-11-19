@@ -30,6 +30,9 @@
 // common include
 include('../inc/connection.php');
 error_reporting(ERRORLEVEL);
+ini_set('display_errors', '1');
+ini_set('error_log','/var/log/php_errors.log');
+$db = 'sqlite:/var/www/db/player.db';
 
 if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 
@@ -174,6 +177,10 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 						$sSpopPlaylistIndex = end(explode("@", $_POST['path']));
 						echo sendSpopCommand($spop, "add " . $sSpopPlaylistIndex);
 					}
+					break;
+
+				case 'rfidlist':
+					echo json_encode(getRfidList($db));
 					break;
 
 			}
