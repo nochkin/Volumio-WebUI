@@ -3,34 +3,19 @@
 	<form>
 		<p><button class="btn btn-large btn-primary" type="submit" name="updatempd" value="1" id="updatempddb"><i class="fa fa-refresh sx"></i>Refresh</button></p>
 	</form>
-	<div class="tile txtsx">
-		<p>Volumio creates and updates its music database via the following source directories:</p>
-		<ul>
-			<li><strong>NAS</strong><br><span class="help-block">This section contains all your connected network shares. (SAMBA/NFS etc.)</span></li>
-			<li><strong>USB</strong><br><span class="help-block">Locally connected external USB drives. (FAT32 or NTFS)</span></li>
-			<li><strong>RAM</strong><br><span class="help-block">The content of the RAMdisk, upload your files here and enjoy RamPlay Heaven.</span></li>
-		</ul>
-	</div>
 	
 	<div class="tile txtsx">
-		<form id="rf-search" method="post" onSubmit="return false;">
-			<div class="input-append">
-				<input id="rf-filter" class="ttip" type="text" value="" placeholder="Search" data-placement="bottom" data-toggle="tooltip" data-original-title="Type here to search on the fly">
-				<button class="btn"><i class="fa fa-search"></i></button>
+		<div id="rfidlist">
+			<ul class="playlist">
+				<!--<li class="pl-entry">&lt; Not Assigned &gt;<span>Tag_name - 02:30:52:51:89:A2</span></span></li>-->
+			</ul>
+		</div>
+		<div class="btnlist btnlist-bottom">
+			<div id="rf-controls">
+				<button id="rf-debug-btn" class="btn hide"><i class="fa fa-random"></i></button>
+				<button class="btn rf-firstPage"><i class="fa fa-angle-double-up"></i></button>
+				<button class="btn rf-lastPage"><i class="fa fa-angle-double-down"></i></button>
 			</div>
-		</form>
-		<div id="rf-filter-results"></div>
-	</div>
-	<div id="rfidlist">
-		<ul class="rfidlist">
-			<!--<li>Unknown Song <span>Unknown Artist - Unknown Album</span></li>-->
-		</ul>
-	</div>
-	<div class="btnlist btnlist-bottom">
-		<div id="rf-controls">
-			<button id="rf-debug-btn" class="btn hide"><i class="fa fa-random"></i></button>
-			<button class="btn rf-firstPage"><i class="fa fa-angle-double-up"></i></button>
-			<button class="btn rf-lastPage"><i class="fa fa-angle-double-down"></i></button>
 		</div>
 	</div>
 </div>
