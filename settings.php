@@ -341,6 +341,26 @@ if (isset($_POST['startupsound']) && $_POST['startupsound'] != $_SESSION['startu
 	playerSession('unlock');
 }
 
+if (isset($_POST['rfid']) && $_POST['rfid'] != $_SESSION['rfid']){
+	// load worker queue 
+	// start / respawn session
+	session_start();
+	// save new value on SQLite datastore
+	if ($_POST['rfid'] == 1 OR $_POST['rfid'] == 0) {
+	playerSession('write',$db,'rfid',$_POST['rfid']);
+	}
+	// set UI notify
+	if ($_POST['rfid'] == 1) {
+	$_SESSION['notify']['title'] = '';
+	$_SESSION['notify']['msg'] = 'RFID support enabled';
+	} else {
+	$_SESSION['notify']['title'] = '';
+	$_SESSION['notify']['msg'] = 'RFID support disabled';
+	}
+	// unlock session file
+	playerSession('unlock');
+}
+
 if (isset($_POST['hostname']) && $_POST['hostname'] != $_SESSION['hostname']){
 	// load worker queue 
 	// start / respawn session
@@ -641,6 +661,8 @@ $_system_select['displaylib1'] .= "<input type=\"radio\" name=\"displaylib\" id=
 $_system_select['displaylib0'] .= "<input type=\"radio\" name=\"displaylib\" id=\"toggledisplaylib2\" value=\"0\" ".(($_SESSION['displaylib'] == 0) ? "checked=\"checked\"" : "").">\n";
 $_system_select['displaylibastab1'] .= "<input type=\"radio\" name=\"displaylibastab\" id=\"toggledisplaylibastab1\" value=\"1\" ".(($_SESSION['displaylibastab'] == 1) ? "checked=\"checked\"" : "").">\n";
 $_system_select['displaylibastab0'] .= "<input type=\"radio\" name=\"displaylibastab\" id=\"toggledisplaylibastab2\" value=\"0\" ".(($_SESSION['displaylibastab'] == 0) ? "checked=\"checked\"" : "").">\n";
+$_system_select['rfid1'] .= "<input type=\"radio\" name=\"rfid\" id=\"togglerfid1\" value=\"1\" ".(($_SESSION['rfid'] == 1) ? "checked=\"checked\"" : "").">\n";
+$_system_select['rfid0'] .= "<input type=\"radio\" name=\"rfid\" id=\"togglerfid2\" value=\"0\" ".(($_SESSION['rfid'] == 0) ? "checked=\"checked\"" : "").">\n";
 $_system_select['spotify1'] .= "<input type=\"radio\" name=\"spotify\" id=\"togglespotify1\" value=\"1\" ".(($_SESSION['spotify'] == 1) ? "checked=\"checked\"" : "").">\n";
 $_system_select['spotify0'] .= "<input type=\"radio\" name=\"spotify\" id=\"togglespotify2\" value=\"0\" ".(($_SESSION['spotify'] == 0) ? "checked=\"checked\"" : "").">\n";
 $_system_select['spotifybitrate1'] .= "<input type=\"radio\" name=\"spotifybitrate\" id=\"togglespotifybitrate1\" value=\"1\" ".(($_SESSION['spotifybitrate'] == 1) ? "checked=\"checked\"" : "").">\n";

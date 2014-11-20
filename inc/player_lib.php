@@ -1788,6 +1788,14 @@ function ami($sz=null) {
 				'credits'
 				))?'active':'');
 			break;
+		case 'rfid':
+			echo (in_array($GLOBALS['sezione'], array(
+				'rfid'
+				))?'active':'');
+			if ($_SESSION['rfid'] == 0) {
+				echo " hidden";
+			}
+			break;
 	}	
 }
 
