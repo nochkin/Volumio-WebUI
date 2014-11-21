@@ -33,6 +33,7 @@
 	SpopState: 0,
     cmd: 'status',
     playlist: null,
+    rfidlist: null,
     currentsong: null,
     currentknob: null,
     state: '',
@@ -149,7 +150,10 @@ function renderUI() {
     if (GUI.MpdState['playlist'] != GUI.playlist) {
         getPlaylist(GUI.MpdState);
         GUI.playlist = GUI.MpdState['playlist'];
-
+    }
+    if (GUI.rfidlist == null) {
+        getRfidlist(GUI.MpdState);
+        GUI.rfidlist = true;
     }
 
     GUI.halt = 0;
@@ -194,7 +198,7 @@ function getPlaylist(json){
                 }
             }
         }
-        $('ul.playlist').html(output);
+        $('div#playlist ul.playlist').html(output);
     });
 }
 
@@ -206,34 +210,19 @@ function getRfidlist(json){
         var output = '';
         if (data) {
             for (i = 0; i < data.length; i++){
-                if (json['state'] != 'stop' && i == parseInt(json['song'])) {
-                    content = '<li id="pl-' + (i + 1) + '" class="active clearfix">';
-                } else {
-                    content = '<li id="pl-' + (i + 1) + '" class="clearfix">';
-                }
+	        content = '<li id="pl-' + (i + 1) + '" class="clearfix">';
                 content += '<div class="pl-action"><a class="btn" href="#notarget" title="Remove song from playlist"><i class="fa fa-remove"></i></a></div>';
-                if (typeof data[i].Title != 'undefined') {
-                    content += '<div class="pl-entry">';
-                    content += data[i].Title + ' <em class="songtime">' + timeConvert(data[i].Time) + '</em>';
-                    content += ' <span>';
-                    content +=  data[i].Artist;
-                    content += ' - ';
-                    content +=  data[i].Album;
-                    content += '</span></div></li>';
-                    output = output + content;
-                } else {
-                    songpath = parsePath(data[i].file);
-                    content += '<div class="pl-entry">';
-                    content += data[i].file.replace(songpath + '/', '') + ' <em class="songtime">' + timeConvert(data[i].Time) + '</em>';
-                    content += ' <span>';
-                    content += ' path \: ';
-                    content += songpath;
-                    content += '</span></div></li>';
-                    output = output + content;
-                }
+                songpath = parsePath(data[i].playfile);
+                content += '<div class="pl-entry">';
+                content += data[i].playfile.replace(songpath + '/', '') + ' <em class="songtime">' + timeConvert(data[i].Time) + '</em>';
+                content += ' <span>';
+                content += ' path \: ';
+                content += songpath;
+                content += '</span></div></li>';
+                output = output + content;
             }
         }
-        $('ul.rfidlist').html(output);
+        $('div#rfidlist ul.playlist').html(output);
     });
 }
 
