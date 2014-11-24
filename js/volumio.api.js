@@ -210,15 +210,16 @@ function getRfidlist(json){
         var output = '';
         if (data) {
             for (i = 0; i < data.length; i++){
-	        content = '<li id="pl-' + (i + 1) + '" class="clearfix">';
-                content += '<div class="pl-action"><a class="btn" href="#notarget" title="Remove song from playlist"><i class="fa fa-remove"></i></a></div>';
                 songpath = parsePath(data[i].playfile);
-                content += '<div class="pl-entry">';
-                content += data[i].playfile.replace(songpath + '/', '') + ' <em class="songtime">' + timeConvert(data[i].Time) + '</em>';
+	        content = '<li id="rfid-' + (i + 1) + '" class="clearfix">';
+		content += '<div class="pl-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-rfid"><i class="fa fa-reorder"></i></a></div>';
+		content += '<div class="pl-entry">';
+                content += data[i].playfile.replace(songpath + '/', '');
                 content += ' <span>';
-                content += ' path \: ';
-                content += songpath;
-                content += '</span></div></li>';
+                content += data[i].tagname;
+                content += '</span>';
+		content += '</div>';
+		content += '</li>';
                 output = output + content;
             }
         }

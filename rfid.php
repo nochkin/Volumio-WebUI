@@ -30,6 +30,9 @@
 // common include
 include('inc/connection.php');
 playerSession('open',$db,'',''); 
+
+$sezione = basename(__FILE__, '.php');
+include('_header.php'); 
 ?>
 
 <?php
@@ -175,10 +178,5 @@ debug($_POST);
 eval("echoTemplate(\"".getTemplate("templates/$tpl")."\");");
 ?>
 <!-- content -->
-
-<?php
-$sezione = basename(__FILE__, '.php');
-include('_header.php'); 
-?>
 
 <?php include('_footer.php'); ?>

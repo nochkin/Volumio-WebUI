@@ -318,7 +318,7 @@ a.btn-cmd {
 /* Playlist and database panels
 -------------------------------------------------------------- */
 
-#playlist, #database {
+#playlist, #database, #rfidlist {
 	padding: 80px 0;
 	background: #525C66;
 }
