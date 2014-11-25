@@ -19,6 +19,15 @@ function notify(command, msg) {
 			});
 		break;
 		
+		case 'addrfid':
+			$.pnotify({
+				title: 'Assigned to RFID',
+				text: msg,
+				icon: 'fa fa-check',
+				opacity: .9
+			});
+		break;
+
 		case 'update':
 			$.pnotify({
 				title: 'Update path: ',

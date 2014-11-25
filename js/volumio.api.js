@@ -212,7 +212,7 @@ function getRfidlist(json){
             for (i = 0; i < data.length; i++){
                 songpath = parsePath(data[i].playfile);
 	        content = '<li id="rfid-' + (i + 1) + '" class="clearfix">';
-		content += '<div class="pl-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-rfid"><i class="fa fa-reorder"></i></a></div>';
+                content += '<div class="pl-action"><a class="btn" href="#notarget" title="Remove song from playlist"><i class="fa fa-remove"></i></a></div>';
 		content += '<div class="pl-entry">';
                 content += data[i].playfile.replace(songpath + '/', '');
                 content += ' <span>';

@@ -448,6 +448,10 @@ jQuery(document).ready(function($){ 'use strict';
 	            $("#pl-saveName").val("");
 			}
         }
+        if ($(this).data('cmd') == 'addrfid') {
+	    getDB('addrfid', path);
+	    notify('addrfid', path);
+	}
         if ($(this).data('cmd') == 'update') {
             getDB('update', path);
             notify('update', path);
