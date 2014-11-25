@@ -183,6 +183,12 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 					echo json_encode(getRfidList($db));
 					break;
 
+				case 'setrfid':
+					if (isset($_POST['path']) && $_POST['path'] != ''
+						&& (isset($_POST['tagid']) && $_POST['tagid'] != '') {
+					}
+					break;
+
 			}
 
 		}

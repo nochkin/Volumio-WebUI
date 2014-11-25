@@ -28,9 +28,9 @@
  */
 
 function getRfidlist($db) {
+	$dbh = new PDO($db);
 	$querystr = 'SELECT tag,tagname,mytime,playfile FROM rfid_tags';
 	$result = array();
-	$dbh = new PDO($db);
 	$query = $dbh->prepare($querystr);
 	if ($query->execute()) {
 		$i = 0;
@@ -40,6 +40,13 @@ function getRfidlist($db) {
 		}
 	}
 	return $result;
+}
+
+function setRfid($db, $path, $tagid) {
+	$dbh = new PDO($db);
+	$querystr = 'UPDATE rfid_tags set playfile=:path where tag=:tagid';
+	$query = $dbh->prepare($querystr);
+	return $query->execute(array(':path' => $path, ':tagid' => $tagid));
 }
  
 ?>

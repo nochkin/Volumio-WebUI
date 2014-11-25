@@ -415,6 +415,10 @@ function getDB(cmd, path, browsemode, uplevel){
 		$.post('db/?cmd=addreplaceplay', { 'path': path }, function(path) {
 		}, 'json');
 
+	} else if (cmd == 'setrfid') {
+		$.post('db/?cmd=setrfid', { 'path': path, 'tagid': browsemode }, function(path) {
+		}, 'json');
+
 	} else if (cmd == 'update') {
 		$.post('db/?cmd=update', { 'path': path }, function(path) {
 		}, 'json');

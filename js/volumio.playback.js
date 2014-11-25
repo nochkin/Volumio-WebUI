@@ -426,6 +426,9 @@ jQuery(document).ready(function($){ 'use strict';
     });
 
     $('.context-menu a').click(function(){
+        if ($(this).data('cmd') == 'ignore') {
+	    return false;
+	}
         var path = GUI.DBentry[0];
         var title = GUI.DBentry[3];
         var artist = GUI.DBentry[4];
@@ -448,9 +451,10 @@ jQuery(document).ready(function($){ 'use strict';
 	            $("#pl-saveName").val("");
 			}
         }
-        if ($(this).data('cmd') == 'addrfid') {
-	    getDB('addrfid', path);
-	    notify('addrfid', path);
+        if ($(this).data('cmd').lastIndexOf('setrfid', 0) === 0) {
+	    var tagid = $(this).data('cmd').slice(8);
+	    getDB('setrfid', path, tagid);
+	    notify('setrfid', path, tagid);
 	}
         if ($(this).data('cmd') == 'update') {
             getDB('update', path);

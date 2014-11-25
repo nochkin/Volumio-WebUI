@@ -1,5 +1,5 @@
 // mostra le notifiche sulle azioni
-function notify(command, msg) {
+function notify(command, msg, parameter) {
 	switch (command) {
 		case 'add':
 			$.pnotify({
@@ -19,9 +19,9 @@ function notify(command, msg) {
 			});
 		break;
 		
-		case 'addrfid':
+		case 'setrfid':
 			$.pnotify({
-				title: 'Assigned to RFID',
+				title: 'Assigned to RFID: ' + parameter,
 				text: msg,
 				icon: 'fa fa-check',
 				opacity: .9
