@@ -42,6 +42,12 @@ if (!isset($_GET['skip_updates']) || $_GET['skip_updates'] != '1') {
     include('updates/check_updates.php');
 }
 
+$rfidlist = getRfidlist($db);
+$_rfid_submenu = "";
+foreach ($rfidlist as $rfidval) {
+	$_rfid_submenu .= '<li><a href="#notarget" data-cmd="setrfid-' . $rfidval['tag'] . '">' . $rfidval['tagname'] . '</a></li>';
+}
+
 // set template
 $tpl = "indextpl.html";
 ?>

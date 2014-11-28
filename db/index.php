@@ -184,8 +184,10 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 					break;
 
 				case 'setrfid':
+					error_log(">> ".$_POST['path'].":".$_POST['tagid'], 0);
 					if (isset($_POST['path']) && $_POST['path'] != ''
-						&& (isset($_POST['tagid']) && $_POST['tagid'] != '') {
+						&& isset($_POST['tagid']) && $_POST['tagid'] != '') {
+							setRfid($db, $_POST['path'], $_POST['tagid']);
 					}
 					break;
 
