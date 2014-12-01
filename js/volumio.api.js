@@ -211,10 +211,14 @@ function getRfidlist(json){
         if (data) {
             for (i = 0; i < data.length; i++){
                 songpath = parsePath(data[i].playfile);
+		songname = data[i].playfile.replace(songpath + '/', '');
+		if (!songname.length) {
+			songname = '&lt; N/A &gt;';
+		}
 	        content = '<li id="rfid-' + (i + 1) + '" class="clearfix">';
                 content += '<div class="pl-action"><a class="btn" href="#notarget" title="Remove song from playlist"><i class="fa fa-remove"></i></a></div>';
-		content += '<div class="pl-entry">';
-                content += data[i].playfile.replace(songpath + '/', '');
+		content += '<div class="pl-entry" data-tagid="' + data[i].tag + '" data-tagname="' + data[i].tagname + '">';
+                content += songname;
                 content += ' <span>';
                 content += data[i].tagname;
                 content += '</span>';

@@ -556,6 +556,16 @@ jQuery(document).ready(function($) {
         getDB('addall', library.allSongs);
     });
 
+    // click on rfidlist actions
+    $('#rfidlist .playlist').on('click', '.pl-action', function(event) {
+        event.preventDefault();
+        var pos = $('#rfidlist .pl-action').index(this);
+	var entry = $('#rfidlist .playlist .pl-entry')[pos];
+        var cmd = 'rfidremove&rfid=' + $(entry).data('tagid');
+        notify('removerfid', $(entry).data('tagname'));
+        sendPLCmd(cmd);
+    });
+
     // Resize event
     $(window).resize(function() {
         decideViewLayout();

@@ -42,10 +42,18 @@ if (!isset($_GET['skip_updates']) || $_GET['skip_updates'] != '1') {
     include('updates/check_updates.php');
 }
 
-$rfidlist = getRfidlist($db);
-$_rfid_submenu = "";
-foreach ($rfidlist as $rfidval) {
-	$_rfid_submenu .= '<li><a href="#notarget" data-cmd="setrfid-' . $rfidval['tag'] . '">' . $rfidval['tagname'] . '</a></li>';
+$_rfid_submenu_show = "hide";
+if ($_SESSION['rfid'] == 1) {
+	$_rfid_submenu_show = "";
+	$rfidlist = getRfidlist($db);
+	$_rfid_submenu = "";
+	if (empty($rfidlist)) {
+		$_rfid_submenu = '<li><a href="#notarget" data-cmd="">&lt; Empty &gt;</a></li>';
+	} else {
+		foreach ($rfidlist as $rfidval) {
+			$_rfid_submenu .= '<li><a href="#notarget" data-cmd="setrfid-' . $rfidval['tag'] . '">' . $rfidval['tagname'] . '</a></li>';
+		}
+	}
 }
 
 // set template

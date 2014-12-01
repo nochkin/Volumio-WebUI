@@ -48,5 +48,13 @@ function setRfid($db, $path, $tagid) {
 	$query = $dbh->prepare($querystr);
 	return $query->execute(array(':path' => $path, ':tagid' => $tagid));
 }
+
+function remRfid($db, $tagid) {
+	$dbh = new PDO($db);
+	$querystr = 'DELETE from rfid_tags where tag=:tagid';
+	$query = $dbh->prepare($querystr);
+	return $query->execute(array(':tagid' => $tagid));
+}
+
  
 ?>

@@ -28,6 +28,15 @@ function notify(command, msg, parameter) {
 			});
 		break;
 
+		case 'removerfid':
+			$.pnotify({
+				title: 'Removed RFID',
+				text: msg,
+				icon: 'fa fa-check',
+				opacity: .9
+			});
+		break;
+
 		case 'update':
 			$.pnotify({
 				title: 'Update path: ',
