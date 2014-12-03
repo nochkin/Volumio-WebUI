@@ -561,9 +561,8 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         var pos = $('#rfidlist .pl-action').index(this);
 	var entry = $('#rfidlist .playlist .pl-entry')[pos];
-        var cmd = 'rfidremove&rfid=' + $(entry).data('tagid');
         notify('removerfid', $(entry).data('tagname'));
-        sendPLCmd(cmd);
+        getDB('removerfid', $(entry).data('tagid'));
     });
 
     // Resize event

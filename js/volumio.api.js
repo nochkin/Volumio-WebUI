@@ -152,7 +152,7 @@ function renderUI() {
         GUI.playlist = GUI.MpdState['playlist'];
     }
     if (GUI.rfidlist == null) {
-        getRfidlist(GUI.MpdState);
+        getRfidlist();
         GUI.rfidlist = true;
     }
 
@@ -202,7 +202,7 @@ function getPlaylist(json){
     });
 }
 
-function getRfidlist(json){
+function getRfidlist(){
     $.getJSON('db/?cmd=rfidlist', function(data) {
         // Read received data for playlist
         var i = 0;
@@ -421,6 +421,11 @@ function getDB(cmd, path, browsemode, uplevel){
 
 	} else if (cmd == 'setrfid') {
 		$.post('db/?cmd=setrfid', { 'path': path, 'tagid': browsemode }, function(path) {
+		}, 'json');
+
+	} else if (cmd == 'removerfid') {
+		$.get('db/?cmd=rfidremove', { 'tagid': path }, function(path) {
+			getRfidlist();
 		}, 'json');
 
 	} else if (cmd == 'update') {

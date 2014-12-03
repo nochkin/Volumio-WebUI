@@ -191,9 +191,9 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 					break;
 
 				case 'rfidremove':
-					if (isset($_GET['rfid']) && $_GET['rfid'] != '') {
-						remRfid($db, $_GET['rfid']);
-						echo json_encode(getRfidList($db));
+					if (isset($_GET['tagid']) && $_GET['tagid'] != '') {
+						remRfid($db, $_GET['tagid']);
+						echo '""';
 					}
 					break;
 
