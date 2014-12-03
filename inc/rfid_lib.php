@@ -29,7 +29,7 @@
 
 function getRfidlist($db) {
 	$dbh = new PDO($db);
-	$querystr = 'SELECT tag,tagname,mytime,playfile FROM rfid_tags';
+	$querystr = 'SELECT tag,tagname,mytime,playfile FROM rfid_tags order by playfile desc,tagname asc,tag asc';
 	$result = array();
 	$query = $dbh->prepare($querystr);
 	if ($query->execute()) {
